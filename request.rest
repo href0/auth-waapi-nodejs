@@ -1,0 +1,44 @@
+GET http://localhost:5000/users
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJub2hwIjoiNjI4MjM3MTU3OTY2NSIsIm5hbWUiOiJmZW5kaSIsImlhdCI6MTYzODAzNjI0MiwiZXhwIjoxNjM4MDM2MjU3fQ.PNqlCbsUeNgbm_Wc0SoIbNbPVv-G6ErauESHP_mrVzs
+###
+POST http://localhost:5000/register
+Content-Type: application/json
+
+{
+    "name":"herman",
+    "nohp":"6285693095506"
+}
+
+###
+POST http://localhost:5000/login
+Content-Type: application/json
+
+{
+    "nohp":"6282371579665"
+}
+
+###
+GET http://localhost:5000/otp
+Content-Type: application/json
+
+{
+    "nohp":"6282371579665"
+}
+###
+POST  http://localhost:5000/verifyotp
+Content-Type: application/json
+
+{
+    "nohp":"6282371579665",
+    "code":"107162"
+}
+
+###
+GET http://localhost:5000/token
+
+###
+GET http://localhost:5000/refreshtoken
+
+###
+DELETE http://localhost:5000/logout
+
