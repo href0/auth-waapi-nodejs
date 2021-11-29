@@ -1,10 +1,12 @@
 import Users from "../models/UserModel.js";
 import Otp from "../models/OtpModel.js";
 import jwt from "jsonwebtoken";
+import { sendOTP } from "../index.js";
+import { phoneNumberFormatter } from "../helper/formatter.js";
 export const getUsers = async (req, res) => {
     try {
         const users = await Users.findAll()
-        res.json(users)
+        res.json({users})
     } catch (error) {
         console.log(error)
     }
@@ -46,9 +48,12 @@ export const Login = async (req, res) => {
             httpOnly:true,
             maxAge: 10 * 60 * 1000
         });
+        const a = 'asas'
+        sendOTP(phoneNumberFormatter(nohp.toString()), code.toString())
         res.status(200).send({otpToken});
     } catch (error) {
         res.status(404).json({msg:"no handphone tidak terdaftar"})
+        // res.sendStatus(403)
     }
 }
 
