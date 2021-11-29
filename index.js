@@ -10,6 +10,7 @@ import qrcode from "qrcode"
 import { Client } from "whatsapp-web.js"
 import fs from "fs"
 
+const port = process.env.PORT || 5000
 const require = createRequire(import.meta.url);
 const socketIO = require('socket.io')
 dotenv.config()
@@ -81,4 +82,4 @@ export const sendOTP = (nohp, otp) => {
         client.sendMessage(nohp, msg)
 }
 
-server.listen(5000, () => console.log('server running at port 5000'))
+server.listen(port, () => console.log('server running at port 5000'))
