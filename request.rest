@@ -1,5 +1,4 @@
 GET http://localhost:5000/users
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJub2hwIjoiNjI4MjM3MTU3OTY2NSIsIm5hbWUiOiJmZW5kaSIsImlhdCI6MTYzODAzNjI0MiwiZXhwIjoxNjM4MDM2MjU3fQ.PNqlCbsUeNgbm_Wc0SoIbNbPVv-G6ErauESHP_mrVzs
 ###
 POST http://localhost:5000/register
 Content-Type: application/json
@@ -30,7 +29,7 @@ Content-Type: application/json
 
 {
     "nohp":"6282371579665",
-    "code":"107162"
+    "code":"731543"
 }
 
 ###
@@ -41,4 +40,13 @@ GET http://localhost:5000/refreshtoken
 
 ###
 DELETE http://localhost:5000/logout
+
+###
+POST http://localhost:5000/send-otp
+Content-Type: application/json
+
+{
+    "nohp":"6282371579665",
+    "msg":"testtt"
+}
 
