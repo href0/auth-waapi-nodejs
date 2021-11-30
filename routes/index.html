@@ -31,6 +31,12 @@
             socket.on('qr', (src) => {
                 $('#qrcode').attr('src', src)
             })
+            socket.on('ready', (msg) => {
+                $('#qrcode').hide()
+            })
+            socket.on('authenticated', (msg) => {
+                $('#qrcode').hide()
+            })
 
         });
     </script>
