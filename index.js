@@ -43,16 +43,6 @@ const client = new Client({
     session: sessionCfg 
 });
 
-client.on('authenticated', (session) => {
-    console.log('AUTHENTICATED', session);
-    sessionCfg=session;
-    fs.writeFile(SESSION_FILE_PATH, JSON.stringify(session), function (err) {
-        if (err) {
-            console.error(err);
-        }
-    });
-});
-
 client.initialize();
 /* ------End Handle API Whatsapp------ */
 
@@ -77,16 +67,31 @@ app.use(router)
 app.use(express.urlencoded({ extended:true }))
 // socket io
 io.on('connection', function(socket){
-    socket.emit('message', 'Connecting...')
+    socket.emit('message', 'Connecting... please wait')
+    
+    client.on('ready', () => {
+        socket.emit('ready', 'Whatsapp ready to use')
+        socket.emit('message', 'Whatsapp ready to use')
+    });
+
     client.on('qr', (qr) => {
         // Generate and scan this code with your phone
-        console.log('QR RECEIVED', qr);
+        // console.log('QR RECEIVED', qr);
         qrcode.toDataURL(qr,(err, url) => {
             socket.emit('qr', url)
-            socket.emit('message', 'QR Code Ready')
+            socket.emit('message', 'QR Code Ready, please scan')
         })
-        client.on('ready', () => {
-            socket.emit('message', 'Whatsapp ready to use')
+    });
+
+    client.on('authenticated', (session) => {
+    socket.emit('authenticated', 'Whatsapp authenticated')
+    socket.emit('message', 'Whatsapp authenticated')
+    // console.log('AUTHENTICATED', session);
+    sessionCfg=session;
+    fs.writeFile(SESSION_FILE_PATH, JSON.stringify(session), function (err) {
+            if (err) {
+                console.error(err);
+            }
         });
     });
 })
