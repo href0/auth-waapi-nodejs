@@ -33,9 +33,13 @@
             })
             socket.on('ready', (msg) => {
                 $('#qrcode').hide()
+                $('#logs').append($('<li>').text(msg))
             })
             socket.on('authenticated', (msg) => {
                 $('#qrcode').hide()
+            })
+            socket.on('scan', (msg) => {
+                $('#qrcode').show()
             })
 
         });
